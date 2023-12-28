@@ -44,6 +44,15 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""e02f3443-fa07-4600-80e6-f7ec9362de5d"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -104,6 +113,17 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""861ab868-2379-44db-ad06-0893b24e35d1"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""eed2a23c-2c6a-4514-8dc1-f90e7ec19c7e"",
                     ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
@@ -150,6 +170,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         m_Grounded = asset.FindActionMap("Grounded", throwIfNotFound: true);
         m_Grounded_Movement = m_Grounded.FindAction("Movement", throwIfNotFound: true);
         m_Grounded_Roll = m_Grounded.FindAction("Roll", throwIfNotFound: true);
+        m_Grounded_Jump = m_Grounded.FindAction("Jump", throwIfNotFound: true);
         // Airborne
         m_Airborne = asset.FindActionMap("Airborne", throwIfNotFound: true);
         m_Airborne_Newaction = m_Airborne.FindAction("New action", throwIfNotFound: true);
@@ -216,12 +237,14 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     private List<IGroundedActions> m_GroundedActionsCallbackInterfaces = new List<IGroundedActions>();
     private readonly InputAction m_Grounded_Movement;
     private readonly InputAction m_Grounded_Roll;
+    private readonly InputAction m_Grounded_Jump;
     public struct GroundedActions
     {
         private @PlayerActions m_Wrapper;
         public GroundedActions(@PlayerActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Grounded_Movement;
         public InputAction @Roll => m_Wrapper.m_Grounded_Roll;
+        public InputAction @Jump => m_Wrapper.m_Grounded_Jump;
         public InputActionMap Get() { return m_Wrapper.m_Grounded; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -237,6 +260,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @Roll.started += instance.OnRoll;
             @Roll.performed += instance.OnRoll;
             @Roll.canceled += instance.OnRoll;
+            @Jump.started += instance.OnJump;
+            @Jump.performed += instance.OnJump;
+            @Jump.canceled += instance.OnJump;
         }
 
         private void UnregisterCallbacks(IGroundedActions instance)
@@ -247,6 +273,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @Roll.started -= instance.OnRoll;
             @Roll.performed -= instance.OnRoll;
             @Roll.canceled -= instance.OnRoll;
+            @Jump.started -= instance.OnJump;
+            @Jump.performed -= instance.OnJump;
+            @Jump.canceled -= instance.OnJump;
         }
 
         public void RemoveCallbacks(IGroundedActions instance)
@@ -314,6 +343,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnRoll(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
     }
     public interface IAirborneActions
     {

@@ -2,56 +2,71 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using StateMachine;
-public class EntityGroundedState : BaseState
+using Entity;
+namespace EntityBaseState
 {
-    new EntityStateMachine _ctx;
-    new EntityStateFactory _factory;
-    public EntityGroundedState(BaseStateMachine currentContext, BaseStateFactory factory) : base(currentContext, factory)
+    public class EntityGroundedState : BaseState
     {
-        this._ctx = currentContext as EntityStateMachine;
-        this._factory = factory as EntityStateFactory;
-        _isRootState = true;
-    }
+        new EntityStateMachine _ctx;
+        new EntityStateFactory _factory;
 
-    public override void CheckSwitchStates()
-    {
-        
-    }
+        Animator _animator;
+        public EntityGroundedState(BaseStateMachine currentContext, BaseStateFactory factory) : base(currentContext, factory)
+        {
+            this._ctx = currentContext as EntityStateMachine;
+            this._factory = factory as EntityStateFactory;
+            _isRootState = true;
 
-    public override void Cleanup()
-    {
-        
-    }
+            _animator = _ctx.Animator;
+        }
 
-    public override void EnterState()
-    {
-        InitializeSubState();
-    }
+        public override void CheckSwitchStates()
+        {
+            if (_ctx.jumpButtonPressed && _ctx.isGrounded)
+            {
+                SwitchState(_factory.Airborne());
+            }
+        }
 
-    public override void ExitState()
-    {
-        
-    }
+        public override void Cleanup()
+        {
 
-    public override void FixedUpdateState()
-    {
-        
-    }
+        }
 
-    public override void InitializeSubState()
-    {
-        this.SetSubState(_factory.Idle());
-    }
+        public override void EnterState()
+        {
+            InitializeSubState();
+            _animator.SetBool("isGrounded", true);
+        }
 
-    public override void LateUpdateState()
-    {
-        
-    }
+        public override void ExitState()
+        {
+            _animator.SetBool("isWalking", false);
+            _animator.SetBool("isRolling", false);
+            _animator.SetBool("isGrounded", false);
+        }
 
-    public override void UpdateState()
-    {
-        CheckSwitchStates();
-    }
+        public override void FixedUpdateState()
+        {
 
-    
+        }
+
+        public override void InitializeSubState()
+        {
+            this.SetSubState(_factory.Idle());
+        }
+
+        public override void LateUpdateState()
+        {
+
+        }
+
+        public override void UpdateState()
+        {
+            CheckSwitchStates();
+        }
+
+
+    }
 }
+

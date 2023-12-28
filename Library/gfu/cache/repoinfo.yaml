@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cacheType: 1
-  lastUpdatedAtString: 2023-12-27T20:46:54.887-08:00
-  initializedAtString: 2023-12-27T20:46:54.887-08:00
+  lastUpdatedAtString: 2023-12-28T15:25:59.719-08:00
+  initializedAtString: 2023-12-28T15:18:23.031-08:00
   currentGitRemote:
     name: origin
     url: https://github.com/Atlanmail/Open-World-Demo.git
@@ -25,13 +25,13 @@ MonoBehaviour:
     token: 
   currentGitBranch:
     name: main
-    tracking: 
+    tracking: origin/main
   currentConfigBranch:
     name: main
     remote:
-      name: 
-      url: 
-    trackingBranch: 
+      name: origin
+      url: https://github.com/Atlanmail/Open-World-Demo.git
+    trackingBranch: main
   currentConfigRemote:
     name: origin
     url: https://github.com/Atlanmail/Open-World-Demo.git

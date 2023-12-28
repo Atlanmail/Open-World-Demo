@@ -16,10 +16,16 @@ MonoBehaviour:
   - Type: 0
     speed: 5
     turnSpeed: 10
+  - Type: 2
+    speed: 10
+    turnSpeed: 5
+  - Type: 4
+    speed: 50
+    turnSpeed: 5
   _rollStats:
     _distance: 3
     _frames: 16
   _jumpStats:
-    _distance: 5
-    _frames: 25
+    _distance: 10
+    _frames: 35
     _state: 0

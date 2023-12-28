@@ -2,33 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using StateMachine;
+using EntityCharController;
 
-[CreateAssetMenu(fileName = "EntityData", menuName = "Data/EntityData")]
-public class EntityData : BaseStateMachineData
+namespace Entity
 {
-    
-    [SerializeField] protected EntityControllerData _controllerData;
-
-    public EntityControllerData ControllerData { get { return _controllerData; } }
-
-    /// <summary>
-    ///  getters
-    /// </summary>
-    
-    
-
-
-    public override BaseStateMachineData Clone()
+    [CreateAssetMenu(fileName = "EntityData", menuName = "Data/EntityData")]
+    public class EntityData : BaseStateMachineData
     {
-        EntityData clone = ScriptableObject.CreateInstance<EntityData>();
-        //Debug.Log(this._controllerData);
-        clone._controllerData = this._controllerData;
 
-        return clone as BaseStateMachineData;
+        [SerializeField] protected EntityControllerData _controllerData;
+
+        public EntityControllerData ControllerData { get { return _controllerData; } }
+
+        /// <summary>
+        ///  getters
+        /// </summary>
+
+
+
+
+        public override BaseStateMachineData Clone()
+        {
+            EntityData clone = ScriptableObject.CreateInstance<EntityData>();
+            //Debug.Log(this._controllerData);
+            clone._controllerData = this._controllerData;
+
+            return clone as BaseStateMachineData;
+        }
+
+        public override void initialize()
+        {
+
+        }
     }
 
-    public override void initialize()
-    {
-        
-    }
 }

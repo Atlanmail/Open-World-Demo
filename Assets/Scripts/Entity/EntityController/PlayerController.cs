@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Entity;
 
 public class PlayerController : MonoBehaviour
 {
@@ -40,6 +41,7 @@ public class PlayerController : MonoBehaviour
        
         _playerActions.Grounded.Movement.performed += MovementDirection_performed;
         _playerActions.Grounded.Roll.performed += Roll_Performed;
+        _playerActions.Grounded.Jump.performed += Jump_Performed;
         
     }
 
@@ -49,16 +51,13 @@ public class PlayerController : MonoBehaviour
     {
         _playerActions.Grounded.Movement.performed -= MovementDirection_performed;
         _playerActions.Grounded.Roll.performed -= Roll_Performed;
+        _playerActions.Grounded.Jump.performed -= Jump_Performed;
     }
-    /*private void Jump_performed(InputAction.CallbackContext context)
+    private void Jump_Performed(InputAction.CallbackContext context)
     {
         Debug.Log("Jump pressed");
-        _entityStateMachine.OnJump();
+        _entityStateMachine.jump();
     }
-    
-
-    
-    */
     private void MovementDirection_performed(InputAction.CallbackContext context)
     {
         
