@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6855ab497ec6734bab5c355731c7db6, type: 3}
+  m_Name: PlayerControllerData
+  m_EditorClassIdentifier: 
+  _movementStats:
+  - Type: 0
+    speed: 5
+    turnSpeed: 10
+  _rollStats:
+    _distance: 3
+    _frames: 16
+  _jumpStats:
+    _distance: 5
+    _frames: 25
+    _state: 0
